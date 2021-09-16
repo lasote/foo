@@ -11,10 +11,14 @@ on:
 
 jobs:
   build:
-    
 
-    runs-on: { os: windows-latest, cc: cl }
-
+    runs-on: ${{ matrix.config.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-latest, cc: gcc }
+          - { os: windows-latest, cc: cl }
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python 3.9
